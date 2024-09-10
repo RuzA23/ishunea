@@ -36,3 +36,18 @@ export interface FilterProps {
   limit?: number;
   fuel?: string;
 }
+
+export interface OptionProps {
+  title: string;
+  value: string;
+}
+
+export interface CustomButtonProps {
+  title: string;
+  options: OptionProps[];
+}
+
+export interface ShowMoreProps {
+  pageNumber: number;
+  isNext: boolean;
+}

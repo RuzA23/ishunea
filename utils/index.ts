@@ -1,13 +1,14 @@
 import { CarProps, FilterProps } from "@/types";
 
 export async function fetchCars(filters: FilterProps) {
+  const { manufacturer, year, model, limit, fuel } = filters;
   const headers = {
-    "x-rapidapi-key": "4c763699f5mshfd76712a9e150ddp1214bdjsn969134131fae",
+    "x-rapidapi-key": "5896416b98msh42da1bfb9ba0402p10bc9cjsnab12022d1c8c",
     "x-rapidapi-host": "cars-by-api-ninjas.p.rapidapi.com",
   };
 
   const response = await fetch(
-    "https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=q3",
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
     { headers: headers }
   );
 
@@ -47,4 +48,14 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   url.searchParams.append("angle", `${angle}`);
 
   return `${url}`;
+};
+
+export const updateSearchParams = (type: string, value: string) => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  searchParams.set(type, value);
+
+  const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+
+  return newPathname;
 };
